@@ -2,43 +2,40 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import s from './FriendList.module.css';
 
-function FriendList({ friends }) {
+export default function FriendList({friends}) {
   return (
     <ul className={s.friendList}>
-      {friends.map(({ id, avatar, name, isOnline }) => (
+      {friends.map(friend =>
         <FriendListItem
-          key={id}
-          avatar={avatar}
-          name={name}
-          isOnline={isOnline}
+        key={friend.id}
+        name={friend.name}
+        avatar={friend.avatar}
+        isOnline={friend.isOnline}
         />
-      ))}
+      )}
     </ul>
-  );
+  )
 }
-
-function FriendListItem({ id, avatar, name, isOnline }) {
-  const status = isOnline ? s.online : s.offline;
-  return (
-    <li className={s.item} key={id}>
-      <span className={status}></span>
-      <img className={s.avatar} src={avatar} alt={name} width="48" />
-      <p className={s.name}>{name}</p>
-    </li>
-  );
-}
-
-FriendListItem.defaultProps = {
-  isOnline: true,
-};
 FriendList.propTypes = {
-  friends: PropTypes.arrayOf(PropTypes.object),
-};
+  friends: PropTypes.arrayOf(PropTypes.object)
+  }
+
+function FriendListItem ({avatar, name, isOnline}) {
+  return (
+  <li className={s.item}>
+    <span className={isOnline ? s.online : s.offline}></span>
+    <img className={s.avatar} src={avatar} alt={name} width="48" />
+    <p className={s.name}>{name}</p>
+  </li>
+  )
+}
+
 FriendListItem.propTypes = {
   id: PropTypes.string,
-  avatar: PropTypes.string,
-  name: PropTypes.string,
-  isOnline: PropTypes.bool,
+  avatar: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  isOnline: PropTypes.bool.isRequired,
 };
-
-export default FriendList;
+FriendListItem.defaultProps = {
+  isOnline: true,
+}

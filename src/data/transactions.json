@@ -4,7 +4,7 @@
     "type": "invoice",
     "amount": "964.82",
     "currency": "LRD"
-  },
+  },  
   {
     "id": "a30f821b-4d25-4ff0-abdd-e340b3f0dd2b",
     "type": "payment",
